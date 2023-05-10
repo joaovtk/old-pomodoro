@@ -21,6 +21,23 @@
                 color: #fff;
             }
 
+            div button {
+                position: relative;
+                bottom: 25px;
+                width: 210px;
+                height: 90px;
+                border: 5px solid #fff;
+                border-radius: 15px;
+                font-size: 30pt;
+                background-color: #cecece;
+                color: #fff;
+            }
+
+            div button:hover {
+                cursor: pointer;
+                opacity: 80%;
+            }
+
             div:hover {
                 cursor: pointer;
             }
@@ -31,14 +48,17 @@
             <span class="min">25</span>
             <span>:</span>
             <span class="sec">00</span>
+            <button>RESET</button>
         </div>
         <script>
             let min = document.querySelector(".min");
             let sec = document.querySelector(".sec");
             let clock = document.querySelector(".clock");
+            let button = document.querySelector("button");
             let time = {
                 min: 25,
-                sec: 00
+                sec: 0,
+                sleep: false
             };
 
             let stopped = true;
@@ -51,7 +71,28 @@
                 }
             });
 
+            button.addEventListener("click", () => {
+                time.min = 25;
+                time.sec = 0;
+                time.sleep = false;
+
+                min.textContent = "25";
+                sec.textContent = "00";
+                window.alert("Temporizador resetado")
+            });
+
             setInterval(() => {
+                if(time.sec == 0 && time.min == 0 && !time.sleep){
+                    window.alert("Hora do descanso!!!!, intervalo de 5 minutos.");
+                    time.min = 0;
+                    time.sec = 5;
+                    time.sleep = true;
+                }else if(time.sleep && time.sec == 0 && time.min == 0){
+                    time.sec = 25;
+                    time.sec = 0;
+                    window.alert("Mais uma rodada de 25 minutos");
+                }
+
                 if(!stopped){
                     if(time.sec == 0){
                         time.min--;
