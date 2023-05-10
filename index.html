@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pomodoro Timer</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+            div {
+                background-color: #000000da;
+                width: 500px;
+                height: 250px;
+                border-radius: 15px;
+                margin: auto;
+                margin-top: 150px;
+                font-size: 80pt;
+                font-family: "Share Tech Mono", monospace;
+                text-align: center;
+                padding-top: 100px;
+                color: #fff;
+            }
+
+            div:hover {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="clock">
+            <span class="min">25</span>
+            <span>:</span>
+            <span class="sec">00</span>
+        </div>
+        <script>
+            let min = document.querySelector(".min");
+            let sec = document.querySelector(".sec");
+            let clock = document.querySelector(".clock");
+            let time = {
+                min: 25,
+                sec: 00
+            };
+
+            let stopped = true;
+
+            clock.addEventListener("click", () => {
+                if(stopped){
+                    stopped = false;
+                }else {
+                    stopped = true;
+                }
+            });
+
+            setInterval(() => {
+                if(!stopped){
+                    if(time.sec == 0){
+                        time.min--;
+                        time.sec = 59;
+                    }else {
+                        time.sec--;
+                    }
+                    min.textContent = time.min;
+                    sec.textContent = time.sec;
+                }
+            }, 1000);
+        </script>
+    </body>
+</html>
